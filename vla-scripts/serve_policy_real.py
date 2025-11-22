@@ -208,7 +208,12 @@ class UniVLAPolicy(BasePolicy):
 
         # Load action decoder
         self.action_decoder = ActionDecoder(window_size = pred_action_horizon)
-        self.action_decoder.net.load_state_dict(torch.load(decoder_checkpoint_path))
+        
+        # debug
+        state_dict = torch.load(decoder_checkpoint_path)
+        print(state_dict.keys())
+
+        self.action_decoder.net.load_state_dict(state_dict)
         self.action_decoder.eval().cuda()
 
 
